@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+@import "svg";
+
+@mixin root($child) {
+  @at-root #{$child}#{&} {
+    @content;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin img-overflow($line: 99em) {
+  overflow: hidden;
+  display: inline-block;
+  line-height: $line;
+  vertical-align: top;
+}
+
+@mixin svg($fn, $width, $height, $color) {
+  @include img-overflow;
+  width: $width + px;
+  height: $height + px;
+  $color: rgba($color, 0.999);
+  background: {
+    image: call(get-function($fn), $color);
+    repeat: no-repeat;
+    size: contain;
+    position: 50% 50%;
+  }
+}
+
+@mixin img($name, $width, $height, $size: contain) {
+  @include img-overflow;
+  width: $width + px;
+  height: $height + px;
+  background: {
+    image: url(#{$imgPath}#{$name}.webp);
+    repeat: no-repeat;
+    position: 50% 50%;
+    size: $size;
+  }
+}
